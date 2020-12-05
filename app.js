@@ -17,7 +17,6 @@ function addFileTextToTextArea(event){
     };
     reader.readAsText(file);
    
-    
 }
 
 function validateFile(filename) {
@@ -30,7 +29,8 @@ function validateFile(filename) {
 
   function spellCheck(text){
 
-    let base_url = "https://api.textgears.com/grammar?key=1gVny1rfj02gy7kY&text="+text;
+    let errors;
+    let base_url = "https://api.textgears.com/spelling?key=1gVny1rfj02gy7kY&text="+text;
     let fetchData = {
         method: 'GET',
         headers: new Headers()
@@ -38,7 +38,38 @@ function validateFile(filename) {
 
     fetch(base_url,fetchData)
     .then(response => response.json())
-    .then(json => console.log(json))    
+    .then(json => {
+        console.log(json);
+
+        var errorsText = json.response.errors;
+        if(errorsText.length==0){
+            alert("No errors detected in the document");
+            return;
+        }
+        else{
+            textarr = text.split(" ");
+            console.log("text arr "+textarr);
+            for(var txt in textarr){
+                for(var elem in errorsText){
+                    if(elem!=null && elem.bad!=null && elem.bad!=""){
+                        console.log(elem.bad);
+                    }
+                    if(elem.bad==txt){
+                        console.log("Detected errors in "+txt);
+                    }
+
+                }
+            }
+        }
+    })    
     .catch(err => console.log('Request Failed', err)); 
+
+    console.log(errors);
+
+    //var errors = jsonResponse.errors;
+
+    // if(errors.length==0){
+    //     alert("No errors found in the document");
+    // }
 
   }
