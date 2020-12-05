@@ -1,16 +1,26 @@
 <html>
     <head>
-        
+        <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>
-        <form>
-            <input type="file" name="fileupload" value="fileupload" id="fileupload">
-                <label for="fileupload"> Select a file to upload</label> 
-            <input type="submit" value="submit">
-        </form>
 
-        <textarea></textarea>
+    <body>
+
+        <h1 class="title">Grammarly</h1>
+        <div class="card">
+            <div class="container">
+                <form>
+                    <input type="file" name="myFile" value="myFile" id="myFile">
+                    <label for="myFile"> Select a file to upload</label> 
+                    <button onclick="addFileTextToTextArea(event)"> Submit</button>
+                </form>
+
+                <textarea id="myTextArea" class="txt-area" placeholder="Your file text will be displayed here.." cols="60" rows="8" readonly></textarea>
+            </div>
+        </div>
+
+
+        <script src="app.js"></script>
 
     </body>
 </html>
