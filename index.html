@@ -2,10 +2,7 @@
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
-
-
     <body>
-
         <h1 class="title">Grammarly</h1>
         <div class="card">
             <div class="container">
@@ -14,13 +11,22 @@
                     <label for="myFile"> Select a file to upload</label> 
                     <button onclick="addFileTextToTextArea(event)"> Submit</button>
                 </form>
-
-                <textarea id="myTextArea" class="txt-area" placeholder="Your file text will be displayed here.." cols="60" rows="8" readonly></textarea>
+                <div id="myTextArea" class="txt-area" placeholder="Your file text will be displayed here.."></textarea>
             </div>
         </div>
 
-
+        <menu id="ctxMenu">
+            <menu title="File">
+                <menu title="Save"></menu>
+                <menu title="Save As"></menu>
+                <menu title="Open"></menu>
+            </menu>
+            <menu title="Edit">
+                <menu title="Cut"></menu>
+                <menu title="Copy"></menu>
+                <menu title="Paste"></menu>
+            </menu>
+        </menu>
         <script src="app.js"></script>
-
     </body>
 </html>

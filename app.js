@@ -1,5 +1,6 @@
 
 
+  
 function addFileTextToTextArea(event){
 
     event.preventDefault();
@@ -36,40 +37,59 @@ function validateFile(filename) {
         headers: new Headers()
     }
 
+    var arr = [];
     fetch(base_url,fetchData)
     .then(response => response.json())
     .then(json => {
         console.log(json);
-
         var errorsText = json.response.errors;
+
         if(errorsText.length==0){
             alert("No errors detected in the document");
             return;
         }
         else{
             textarr = text.split(" ");
-            console.log("text arr "+textarr);
-            for(var txt in textarr){
-                for(var elem in errorsText){
-                    if(elem!=null && elem.bad!=null && elem.bad!=""){
-                        console.log(elem.bad);
-                    }
-                    if(elem.bad==txt){
-                        console.log("Detected errors in "+txt);
-                    }
-
-                }
+            errorsText.forEach(element => 
+                arr.push(element.bad)
+                );
+                document.getElementById('myTextArea').innerHTML = transformContent(text,arr);
             }
-        }
-    })    
+           })
+
     .catch(err => console.log('Request Failed', err)); 
-
     console.log(errors);
-
-    //var errors = jsonResponse.errors;
-
-    // if(errors.length==0){
-    //     alert("No errors found in the document");
-    // }
-
   }
+        
+
+  function transformContent(content, keywords){
+    let temp = content;
+  
+    keywords.forEach(keyword => {
+      temp = temp.replace(new RegExp(keyword, 'ig'), wrapKeywordWithHTML(keyword, `https://www.google.com/search?q=${keyword}`))
+    })
+  
+    return temp;
+  }
+  
+  function wrapKeywordWithHTML(keyword, url){
+    return `<a href="${url}" target="_blank"> <span style="font-weight: bold; color: red; font-size: 30px">  ${keyword}  </span> </a>`
+  }
+
+  var notepad = document.getElementById("myTextArea");
+  
+  notepad.addEventListener("contextmenu",function(event){
+      event.preventDefault();
+      var ctxMenu = document.getElementById("ctxMenu");
+      ctxMenu.style.display = "block";
+      ctxMenu.style.left = (event.pageX - 10)+"px";
+      ctxMenu.style.top = (event.pageY - 10)+"px";
+  },false);
+
+
+  notepad.addEventListener("click",function(event){
+      var ctxMenu = document.getElementById("ctxMenu");
+      ctxMenu.style.display = "";
+      ctxMenu.style.left = "";
+      ctxMenu.style.top = "";
+  },false);
