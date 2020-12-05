@@ -66,18 +66,18 @@ function validateFile(filename) {
     let temp = content;
   
     keywords.forEach(keyword => {
-      temp = temp.replace(new RegExp(keyword, 'ig'), wrapKeywordWithHTML(keyword, `https://www.google.com/search?q=${keyword}`))
+      temp = temp.replace(new RegExp(keyword, 'ig'), wrapKeywordWithHTML(keyword))
     })
   
     return temp;
   }
   
-  function wrapKeywordWithHTML(keyword, url){
-    return `<a href="${url}" target="_blank"> <span style="font-weight: bold; color: red; font-size: 30px">  ${keyword}  </span> </a>`
+  function wrapKeywordWithHTML(keyword){
+    return `<span style=" text-decoration: underline;text-decoration-color: red;">  ${keyword}</span>`
   }
 
   var notepad = document.getElementById("myTextArea");
-  
+
   notepad.addEventListener("contextmenu",function(event){
       event.preventDefault();
       var ctxMenu = document.getElementById("ctxMenu");
