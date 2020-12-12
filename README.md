@@ -11,7 +11,7 @@ For deployment:
 - <?php header( 'Location: /index.html' ) ;  ?>
 - Then we’ll use the command line tool called git to initialize or create a version of the site you want to deploy. To do that run the command.
 - git init
-- git add .
+- git add.
 - git commit -m "My site ready for deployment."
 - Now you want to create your site on Heroku. If you’re already logged in (because you ran heroku login  earlier), you can issue the following command:
 - heroku apps:create my-static-site-example
