@@ -8,7 +8,7 @@ For local setup  follow the instructions below:
 For deployment:
 - First run cd Projects/my-site on you terminal/cmd
 - create an index.php file. We can trick Heroku to deploy a static site by including 1 dynamic file.The index.php file will be served by Heroku before your index.html. We need   to make the browser redirect from index.php to index.html. We only need to include one line of PHP code.
-- <?php header( 'Location: /index.html' ) ;  ?>
+- Command : "<?php header( 'Location: /index.html' ) ;  ?>"
 - Then we’ll use the command line tool called git to initialize or create a version of the site you want to deploy. To do that run the command.
 - git init
 - git add.
